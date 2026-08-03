@@ -1,0 +1,82 @@
+/* ==========================================================================
+   04 — LAYOUT PRIMITIVES
+   Composable containers. Sections describe what they are, not how they sit.
+   ========================================================================== */
+
+.wrap {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.wrap--narrow { max-width: 62rem; }
+.wrap--flush  { padding-inline: 0; max-width: none; }
+
+.section { padding-block: var(--s-xl); }
+.section--tight { padding-block: var(--s-lg); }
+.section--tall  { padding-block: var(--s-2xl); }
+.section--flush { padding-block: 0; }
+
+/* Numbered section header — the recurring "01 / DISCIPLINES" device,
+   rebuilt at a legible size and with a real heading element inside. */
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-sm);
+  padding-block-end: var(--s-2xs);
+  border-block-end: var(--rule) solid var(--line);
+  margin-block-end: var(--s-lg);
+}
+.section-head__num {
+  font-family: var(--font-display);
+  font-size: var(--t-label);
+  letter-spacing: var(--track-caps);
+  color: var(--fg-mute);
+}
+.section-head__title {
+  font-family: var(--font-display);
+  font-size: var(--t-h3);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--fg);
+}
+.section-head__aside {
+  margin-inline-start: auto;
+  font-size: var(--t-label);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  text-decoration: none;
+  border-block-end: var(--hairline) solid transparent;
+  transition: color var(--d-fast), border-color var(--d-fast);
+}
+.section-head__aside:hover { color: var(--fg); border-color: var(--fg); }
+
+/* Generic auto-fit grid. min column width passed in per use. */
+.grid {
+  display: grid;
+  gap: var(--s-md);
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--col, 18rem), 100%), 1fr));
+}
+
+.stack > * + * { margin-block-start: var(--flow, var(--s-sm)); }
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2xs);
+  align-items: center;
+}
+
+/* Hairline-separated mosaic: the gaps ARE the rules, so no borders needed. */
+.mosaic {
+  display: grid;
+  gap: var(--rule);
+  background: var(--line);
+}
+@media (min-width: 48rem) {
+  .mosaic--2 { grid-template-columns: 3fr 2fr; }
+  .mosaic--2-rev { grid-template-columns: 2fr 3fr; }
+  .mosaic--3 { grid-template-columns: repeat(3, 1fr); }
+}

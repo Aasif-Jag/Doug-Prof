@@ -1,0 +1,126 @@
+/* ==========================================================================
+   03 — BASE TYPOGRAPHY & GROUND SWITCHING
+   ========================================================================== */
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  font-weight: 400;
+  overflow-x: clip;
+}
+
+/* --------------------------------------------------------------------------
+   GROUND SWITCH
+   The site alternates between newsprint and ink like a printed flyer.
+   Rather than overriding twenty properties per section, a section declares
+   its ground once and every token beneath it re-points. This is the single
+   most useful thing in the stylesheet.
+   -------------------------------------------------------------------------- */
+
+.on-paper {
+  --bg: var(--c-paper);
+  --bg-raised: #E2DCC9;
+  --fg: var(--c-ink-on-paper);
+  --fg-dim: var(--c-ink-on-paper-dim);
+  --fg-mute: var(--c-ink-on-paper-mute);
+  --accent-text: var(--c-red-on-paper);
+  --line: rgba(26, 18, 8, 0.22);
+  --focus: var(--c-focus-on-paper);
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.on-ink {
+  --bg: var(--c-ink);
+  --bg-raised: var(--c-ink-raised);
+  --fg: var(--c-paper);
+  --fg-dim: var(--c-paper-dim);
+  --fg-mute: var(--c-paper-mute);
+  --accent-text: var(--c-red-text);
+  --line: var(--c-ink-line);
+  --focus: var(--c-focus);
+  background: var(--bg);
+  color: var(--fg);
+}
+
+/* --------------------------------------------------------------------------
+   TYPE PRIMITIVES
+   -------------------------------------------------------------------------- */
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--track-display);
+  text-transform: uppercase;
+}
+
+.serif {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  line-height: var(--lh-snug);
+}
+.serif em { font-style: italic; color: var(--accent-text); }
+
+/* The stamped label. 12px floor, wide tracking, never lower.
+   This replaces every 0.42rem Special Elite label in the original comp. */
+.label {
+  font-family: var(--font-body);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  line-height: var(--lh-normal);
+  color: var(--fg-mute);
+}
+.label--accent { color: var(--accent-text); }
+
+.meta {
+  font-size: var(--t-meta);
+  letter-spacing: var(--track-wide);
+  color: var(--fg-mute);
+}
+
+.lead {
+  font-size: var(--t-lead);
+  line-height: 1.5;
+  color: var(--fg-dim);
+  max-width: var(--measure);
+}
+
+.prose { max-width: var(--measure); }
+.prose > * + * { margin-top: 1em; }
+.prose p { color: var(--fg-dim); }
+.prose strong { color: var(--fg); font-weight: 500; }
+
+h1, h2, h3, h4 { font-weight: 400; }
+
+a { color: inherit; }
+
+/* Visible only to screen readers, until focused. */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  top: var(--s-sm); left: var(--s-sm);
+  z-index: calc(var(--z-nav) + 1);
+  transform: translateY(-200%);
+  background: var(--c-paper);
+  color: var(--c-ink-on-paper);
+  padding: var(--s-2xs) var(--s-sm);
+  font-size: var(--t-label);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform var(--d-fast) var(--ease);
+}
+.skip-link:focus { transform: none; }

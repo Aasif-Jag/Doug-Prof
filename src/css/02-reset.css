@@ -1,0 +1,62 @@
+/* ==========================================================================
+   02 — RESET
+   Opinionated, minimal. Not normalize.css — we don't need 400 lines to
+   support browsers nobody in this audience uses.
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+* { margin: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: 6rem;   /* anchors clear the fixed nav */
+}
+
+/* Native smooth scroll only when the user hasn't asked us to stop.
+   No scroll-hijacking library: it fights the OS, breaks trackpad momentum
+   and is a WCAG 2.2.2 risk. The browser already does this well. */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  min-height: 100svh;
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+img { height: auto; }
+
+input, button, textarea, select { font: inherit; color: inherit; }
+
+p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }
+
+ul[role="list"], ol[role="list"] { list-style: none; padding: 0; }
+
+/* Focus: never removed, only restyled. Two-tone so it survives any ground. */
+:focus-visible {
+  outline: var(--focus-ring) solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+:focus:not(:focus-visible) { outline: none; }
+
+/* Honour the OS setting rather than assuming everyone wants parallax. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+::selection { background: var(--c-red); color: var(--c-paper); }

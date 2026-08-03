@@ -1,0 +1,15 @@
+{
+  "name": "doug-francisco",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Doug Francisco — creative direction & immersive experience. Static site, no framework.",
+  "scripts": {
+    "build": "node tools/build-css.js && node tools/build-html.js",
+    "images": "python3 tools/build-images.py",
+    "check": "node tools/check-contrast.js && node tools/audit.js",
+    "verify": "npm run build && npm run check",
+    "serve": "python3 -m http.server 8080"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

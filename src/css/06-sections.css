@@ -1,0 +1,302 @@
+/* ==========================================================================
+   06 — SECTIONS
+   Page-level compositions. Mobile first; desktop enhancements added at
+   breakpoints named after the content, not the device.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   HERO
+   Mobile: one photograph, type below it, CTAs immediately visible.
+   Desktop: three-panel collage with type crashing across.
+   The proposition and the primary CTA are above the fold at every width —
+   that is the non-negotiable constraint this layout is built around.
+   -------------------------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  display: grid;
+  min-height: 100svh;
+  grid-template-rows: 44svh 1fr;
+  background: var(--c-ink);
+}
+
+.hero__collage {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+}
+.hero__panel { position: relative; overflow: hidden; }
+.hero__panel:not(.hero__panel--lead) { display: none; }
+.hero__panel img { width: 100%; height: 100%; object-fit: cover; }
+.hero__panel::after {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(8,6,4,0.55) 0%, rgba(8,6,4,0) 26%,
+                               rgba(8,6,4,0) 55%, rgba(8,6,4,0.96) 100%);
+}
+
+.hero__type {
+  position: relative;
+  z-index: var(--z-raised);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--s-sm);
+  padding: 0 var(--gutter) var(--s-lg);
+  margin-block-start: -3rem;           /* type overlaps the image edge */
+}
+
+.hero__name {
+  font-family: var(--font-display);
+  font-size: var(--t-hero);
+  line-height: 0.82;
+  letter-spacing: var(--track-display);
+  text-transform: uppercase;
+  color: var(--c-paper);
+  text-shadow: 0 2px 20px rgba(8, 6, 4, 0.7);
+}
+.hero__name span { display: block; color: var(--c-red); }
+
+.hero__prop {
+  font-family: var(--font-serif);
+  font-size: var(--t-lead);
+  font-weight: 300;
+  line-height: 1.35;
+  color: var(--c-paper);
+  max-width: 30ch;
+}
+.hero__prop em { font-style: italic; color: var(--c-red-text); }
+
+.hero__sub {
+  font-size: var(--t-sm);
+  line-height: 1.6;
+  color: var(--c-paper-dim);
+  max-width: 48ch;
+}
+
+.hero__actions { display: flex; flex-wrap: wrap; gap: var(--s-2xs); }
+
+.hero__scroll { display: none; }
+
+@media (min-width: 62rem) {
+  .hero {
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    min-height: 100svh;
+  }
+  .hero__collage {
+    position: absolute;
+    inset: 0;
+    grid-template-columns: 1.35fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: var(--rule);
+    background: var(--c-ink-line);
+  }
+  .hero__panel:not(.hero__panel--lead) { display: block; }
+  .hero__panel--lead { grid-column: 1; grid-row: 1 / 3; }
+  .hero__panel--lead::after {
+    background:
+      linear-gradient(to right, rgba(8,6,4,0.25) 0%, rgba(8,6,4,0) 45%,
+                                rgba(8,6,4,0.9) 100%),
+      linear-gradient(to top, rgba(8,6,4,0.95) 0%, rgba(8,6,4,0) 45%);
+  }
+  .hero__type {
+    grid-area: 1 / 1;
+    margin: 0;
+    justify-content: flex-end;
+    padding: var(--s-2xl) var(--gutter) var(--s-xl);
+    max-width: 62rem;
+  }
+  .hero__prop { font-size: var(--t-h4); max-width: 26ch; }
+  .hero__scroll {
+    display: block;
+    position: absolute;
+    inset-block-end: var(--s-md);
+    inset-inline-end: var(--gutter);
+    z-index: var(--z-raised);
+    writing-mode: vertical-rl;
+    font-size: var(--t-label);
+    letter-spacing: var(--track-caps);
+    text-transform: uppercase;
+    color: var(--c-paper-mute);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   PROOF BAR — client names, directly beneath the hero.
+   Named clients do more for credibility than any adjective. This replaces
+   the original "Available for: [five vague tags]" strip.
+   -------------------------------------------------------------------------- */
+
+.proofbar {
+  border-block: var(--hairline) solid var(--c-ink-line);
+  background: var(--c-ink);
+  padding-block: var(--s-sm);
+}
+.proofbar__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-xs) var(--s-md);
+}
+.proofbar__label { flex: 0 0 auto; }
+.proofbar__list {
+  display: flex; flex-wrap: wrap; gap: var(--s-xs) var(--s-md);
+  list-style: none; margin: 0; padding: 0;
+}
+.proofbar__list li {
+  font-family: var(--font-display);
+  font-size: var(--t-h4);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--c-paper-dim);
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
+   SERVICES — three lines, not eleven disciplines.
+   -------------------------------------------------------------------------- */
+
+.services { border-block-end: var(--rule) solid var(--c-ink-on-paper); }
+.services__grid {
+  display: grid;
+  border-block-start: var(--rule) solid var(--c-ink-on-paper);
+}
+@media (min-width: 52rem) {
+  .services__grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.service {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2xs);
+  padding: var(--s-md) var(--s-md) var(--s-lg);
+  border-block-end: var(--rule) solid var(--c-ink-on-paper);
+  text-decoration: none;
+  color: inherit;
+  transition: background var(--d-fast) var(--ease), color var(--d-fast) var(--ease);
+}
+@media (min-width: 52rem) {
+  .service { border-block-end: 0; border-inline-end: var(--rule) solid var(--c-ink-on-paper); }
+  .service:last-child { border-inline-end: 0; }
+}
+.service:hover, .service:focus-visible {
+  background: var(--c-ink-on-paper);
+  color: var(--c-paper);
+}
+.service:hover .service__num { color: rgba(237, 232, 216, 0.24); }
+.service:hover .service__desc,
+.service:hover .service__list { color: var(--c-paper-dim); }
+.service:hover .service__more { color: var(--c-red-text); }
+
+.service__num {
+  font-family: var(--font-display);
+  font-size: var(--t-h2);
+  line-height: 1;
+  color: rgba(26, 18, 8, 0.16);
+  transition: color var(--d-fast);
+}
+.service__title {
+  font-family: var(--font-serif);
+  font-size: var(--t-h3);
+  font-weight: 300;
+  line-height: 1.05;
+}
+.service__title em { font-style: italic; color: var(--accent-text); }
+.service__desc {
+  font-size: var(--t-sm);
+  line-height: 1.65;
+  color: var(--fg-dim);
+  transition: color var(--d-fast);
+}
+.service__list {
+  list-style: none; margin: var(--s-2xs) 0 0; padding: 0;
+  display: grid; gap: 0.15rem;
+  font-size: var(--t-meta);
+  color: var(--fg-mute);
+  transition: color var(--d-fast);
+}
+.service__list li::before { content: "— "; }
+.service__more {
+  margin-block-start: auto;
+  padding-block-start: var(--s-sm);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--accent-text);
+  transition: color var(--d-fast);
+}
+
+/* --------------------------------------------------------------------------
+   TESTIMONIAL
+   -------------------------------------------------------------------------- */
+
+.quote { padding-block: var(--s-xl); }
+.quote blockquote {
+  font-family: var(--font-serif);
+  font-size: var(--t-h3);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.3;
+  color: var(--fg);
+  max-width: 26ch;
+  margin: 0;
+}
+.quote figcaption {
+  margin-block-start: var(--s-sm);
+  font-size: var(--t-label);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.quote figcaption strong { color: var(--fg-dim); font-weight: 500; }
+
+/* --------------------------------------------------------------------------
+   SPLIT — image beside text (About teaser)
+   -------------------------------------------------------------------------- */
+
+.split { display: grid; }
+@media (min-width: 52rem) {
+  .split { grid-template-columns: 1fr 1fr; align-items: stretch; }
+  .split--rev > :first-child { order: 2; }
+}
+.split__media { position: relative; min-height: 20rem; overflow: hidden; }
+.split__media img { width: 100%; height: 100%; object-fit: cover; }
+.split__body {
+  display: flex; flex-direction: column; justify-content: center;
+  gap: var(--s-sm);
+  padding: var(--s-xl) var(--gutter);
+}
+@media (min-width: 52rem) {
+  .split__body { padding-inline: var(--s-lg); }
+}
+
+/* --------------------------------------------------------------------------
+   CTA BAND — closes every page. One job.
+   -------------------------------------------------------------------------- */
+
+.cta-band { text-align: center; border-block-start: var(--rule) solid var(--c-ink-on-paper); }
+.cta-band__inner {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-sm);
+  padding-block: var(--s-xl);
+}
+.cta-band h2 {
+  font-family: var(--font-display);
+  font-size: var(--t-h1);
+  line-height: 0.9;
+  text-transform: uppercase;
+  letter-spacing: var(--track-display);
+}
+.cta-band h2 em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  text-transform: none;
+  color: var(--accent-text);
+}
+.cta-band p { max-width: 46ch; color: var(--fg-dim); }
+.cta-band .btn--primary { --btn-fg: var(--c-paper); }

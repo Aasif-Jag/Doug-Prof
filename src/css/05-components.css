@@ -1,0 +1,356 @@
+/* ==========================================================================
+   05 — COMPONENTS
+   Reusable across every page. Nothing page-specific lives here.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   BUTTON / CTA
+   The commercial engine. .btn--primary is reserved exclusively for
+   "Work With Doug" and "Discuss a Project" — the two conversion actions.
+   Nothing else on the site is allowed to wear it.
+   -------------------------------------------------------------------------- */
+
+.btn {
+  --btn-bg: transparent;
+  --btn-fg: var(--fg);
+  --btn-line: var(--fg);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2xs);
+  min-height: 3rem;                    /* ≥44px tap target (WCAG 2.5.8) */
+  padding: var(--s-2xs) var(--s-md);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  border: var(--rule) solid var(--btn-line);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--d-fast) var(--ease),
+              color var(--d-fast) var(--ease),
+              border-color var(--d-fast) var(--ease),
+              transform var(--d-fast) var(--ease);
+}
+.btn__arrow { transition: transform var(--d-fast) var(--ease); }
+.btn:hover .btn__arrow { transform: translateX(3px); }
+
+.btn--primary {
+  --btn-bg: var(--c-red);
+  --btn-fg: var(--c-paper);            /* 6.3:1 on --c-red */
+  --btn-line: var(--c-red);
+}
+.btn--primary:hover { --btn-bg: #E32A16; --btn-line: #E32A16; }
+
+.btn--ghost:hover { --btn-bg: var(--fg); --btn-fg: var(--bg); }
+
+.btn--lg { min-height: 3.5rem; font-size: var(--t-sm); padding-inline: var(--s-lg); }
+
+/* Understated text link with a rule that draws itself in. */
+.link-quiet {
+  display: inline-block;
+  color: var(--accent-text);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding-block-end: 2px;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% var(--hairline);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size var(--d-mid) var(--ease);
+}
+.link-quiet:hover { background-size: 100% var(--hairline); }
+
+/* --------------------------------------------------------------------------
+   TAG — the torn flyposter label
+   -------------------------------------------------------------------------- */
+
+.tag {
+  display: inline-block;
+  padding: 0.35em 0.7em;
+  background: var(--c-paper);
+  color: var(--c-ink-on-paper);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+.tag--red { background: var(--c-red); color: var(--c-paper); }
+.tag--outline {
+  background: transparent;
+  color: var(--fg);
+  box-shadow: inset 0 0 0 var(--hairline) var(--line);
+}
+/* Rotation is decorative only — applied by :nth-child so the markup
+   stays clean and the angles never repeat in a visible rhythm. */
+.cluster--torn .tag:nth-child(3n+1) { transform: rotate(-1.1deg); }
+.cluster--torn .tag:nth-child(3n+2) { transform: rotate(0.8deg); }
+.cluster--torn .tag:nth-child(3n+3) { transform: rotate(-0.4deg); }
+
+/* --------------------------------------------------------------------------
+   FIGURE — blur-up responsive image
+   The LQIP sits as a background so there is never a white flash, and the
+   aspect-ratio box means zero cumulative layout shift.
+   -------------------------------------------------------------------------- */
+
+.fig {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--c-ink-raised);
+  background-size: cover;
+  background-position: center;
+}
+.fig > img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: contrast(1.04) saturate(0.94);
+  opacity: 0;
+  transition: opacity var(--d-slow) var(--ease);
+}
+.fig > img.is-loaded { opacity: 1; }
+.fig--cover { position: absolute; inset: 0; }
+
+.credit {
+  position: absolute;
+  inset-block-end: var(--s-3xs);
+  inset-inline-end: var(--s-2xs);
+  font-size: 0.6875rem;                /* 11px — decorative credit, not content */
+  letter-spacing: 0.06em;
+  color: rgba(237, 232, 216, 0.55);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   PROJECT CARD — the whole cell is the link (one tab stop, not three)
+   -------------------------------------------------------------------------- */
+
+.card {
+  position: relative;
+  display: block;
+  min-height: 16rem;
+  overflow: hidden;
+  background: var(--c-ink-raised);
+  text-decoration: none;
+  color: var(--c-paper);
+  isolation: isolate;
+}
+.card__media { position: absolute; inset: 0; z-index: -2; }
+.card__media img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform var(--d-slow) var(--ease);
+}
+.card::after {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(to top,
+    rgba(8, 6, 4, 0.94) 0%,
+    rgba(8, 6, 4, 0.62) 34%,
+    rgba(8, 6, 4, 0.12) 68%,
+    rgba(8, 6, 4, 0.35) 100%);
+  transition: background var(--d-mid) var(--ease);
+}
+.card:hover .card__media img { transform: scale(1.035); }
+.card:hover::after {
+  background: linear-gradient(to top,
+    rgba(8, 6, 4, 0.97) 0%,
+    rgba(8, 6, 4, 0.72) 42%,
+    rgba(8, 6, 4, 0.22) 78%,
+    rgba(8, 6, 4, 0.4) 100%);
+}
+.card__body {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  padding: var(--s-md);
+  display: grid;
+  gap: var(--s-3xs);
+}
+.card__eyebrow {
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--c-red-text);
+}
+.card__title {
+  font-family: var(--font-serif);
+  font-size: var(--t-h3);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--c-paper);
+}
+.card__title em { font-style: italic; }
+.card__desc {
+  font-size: var(--t-sm);
+  line-height: 1.55;
+  color: var(--c-paper-dim);
+  max-width: 42ch;
+}
+.card__year {
+  position: absolute;
+  inset-block-start: var(--s-sm);
+  inset-inline-end: var(--s-sm);
+  font-size: var(--t-meta);
+  letter-spacing: var(--track-wide);
+  color: var(--c-paper-mute);
+}
+/* Flagship cards get real estate, not decoration. */
+.card--flagship { min-height: clamp(22rem, 58vw, 38rem); }
+.card--flagship .card__title { font-size: var(--t-h2); }
+.card--flagship .card__desc { font-size: var(--t-body); max-width: 46ch; }
+
+/* --------------------------------------------------------------------------
+   NAV
+   -------------------------------------------------------------------------- */
+
+.nav {
+  position: fixed;
+  inset-block-start: 0; inset-inline: 0;
+  z-index: var(--z-nav);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-sm);
+  padding: var(--s-2xs) var(--gutter);
+  transition: background var(--d-mid) var(--ease),
+              backdrop-filter var(--d-mid);
+}
+.nav::before {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(to bottom, rgba(8,6,4,0.92), rgba(8,6,4,0));
+  pointer-events: none;
+}
+.nav.is-stuck {
+  background: rgba(8, 6, 4, 0.94);
+  backdrop-filter: blur(10px);
+  border-block-end: var(--hairline) solid var(--c-ink-line);
+}
+.nav.is-stuck::before { opacity: 0; }
+
+.nav__logo {
+  font-family: var(--font-display);
+  font-size: var(--t-h4);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--c-paper);
+  line-height: 1;
+}
+.nav__menu {
+  display: none;
+  list-style: none;
+  gap: var(--s-md);
+  margin: 0; padding: 0;
+}
+.nav__link {
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--c-paper-dim);
+  transition: color var(--d-fast);
+}
+.nav__link:hover, .nav__link[aria-current="page"] { color: var(--c-paper); }
+.nav__cta { display: none; }
+
+.nav__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem; height: 2.75rem;      /* 44px tap target */
+  background: none;
+  border: var(--hairline) solid var(--c-ink-line);
+  color: var(--c-paper);
+  cursor: pointer;
+}
+.nav__toggle svg { width: 1.25rem; height: 1.25rem; }
+.nav__toggle .icon-close { display: none; }
+.nav__toggle[aria-expanded="true"] .icon-close { display: block; }
+.nav__toggle[aria-expanded="true"] .icon-open { display: none; }
+
+/* Mobile drawer */
+.nav__panel {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  display: grid;
+  align-content: center;
+  gap: var(--s-md);
+  padding: var(--s-xl) var(--gutter);
+  background: var(--c-ink);
+  transform: translateY(-100%);
+  visibility: hidden;
+  transition: transform var(--d-mid) var(--ease-io), visibility var(--d-mid);
+}
+.nav__panel[data-open="true"] { transform: none; visibility: visible; }
+.nav__panel a {
+  font-family: var(--font-display);
+  font-size: var(--t-h2);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--c-paper);
+  line-height: 1.1;
+}
+.nav__panel a:hover { color: var(--c-red-text); }
+
+@media (min-width: 62rem) {
+  .nav__menu, .nav__cta { display: flex; }
+  .nav__toggle, .nav__panel { display: none; }
+}
+
+/* --------------------------------------------------------------------------
+   FOOTER
+   -------------------------------------------------------------------------- */
+
+.footer { border-block-start: var(--hairline) solid var(--line); }
+.footer__grid {
+  display: grid;
+  gap: var(--s-lg);
+  padding-block: var(--s-lg);
+}
+@media (min-width: 48rem) {
+  .footer__grid { grid-template-columns: 2fr 1fr 1fr; }
+}
+.footer__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-3xs); }
+.footer__list a {
+  font-size: var(--t-sm);
+  color: var(--fg-dim);
+  text-decoration: none;
+  transition: color var(--d-fast);
+}
+.footer__list a:hover { color: var(--fg); }
+.footer__bar {
+  display: flex; flex-wrap: wrap; gap: var(--s-sm);
+  justify-content: space-between;
+  padding-block: var(--s-sm);
+  border-block-start: var(--hairline) solid var(--line);
+  font-size: var(--t-meta);
+  color: var(--fg-mute);
+}
+
+/* --------------------------------------------------------------------------
+   REVEAL — IntersectionObserver-driven. ~0KB, no GSAP needed for this.
+   -------------------------------------------------------------------------- */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity var(--d-slow) var(--ease),
+              transform var(--d-slow) var(--ease);
+}
+[data-reveal].is-visible { opacity: 1; transform: none; }
+
+/* If JS never runs, content must still be visible. */
+.no-js [data-reveal] { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; }
+}
