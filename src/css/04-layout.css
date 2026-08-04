@@ -12,9 +12,9 @@
 .wrap--narrow { max-width: 62rem; }
 .wrap--flush  { padding-inline: 0; max-width: none; }
 
-.section { padding-block: var(--s-xl); }
-.section--tight { padding-block: var(--s-lg); }
-.section--tall  { padding-block: var(--s-2xl); }
+.section { padding-block: var(--s-2xl); }
+.section--tight { padding-block: var(--s-xl); }
+.section--tall  { padding-block: clamp(6rem, 5rem + 5vw, 12rem); }
 .section--flush { padding-block: 0; }
 
 /* Numbered section header — the recurring "01 / DISCIPLINES" device,
