@@ -872,8 +872,8 @@ a { color: inherit; }
     inset: 0;
     grid-template-columns: 1.35fr 1fr;
     grid-template-rows: 1fr 1fr;
-    gap: var(--rule);
-    background: var(--c-ink-line);
+    gap: 0;
+    background: var(--c-ink);
   }
   .hero__panel:not(.hero__panel--lead) { display: block; }
   .hero__panel--lead { grid-column: 1; grid-row: 1 / 3; }
