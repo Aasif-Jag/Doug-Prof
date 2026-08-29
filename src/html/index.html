@@ -94,16 +94,8 @@
      collage collapses to a single 44svh panel so the type is never pushed
      below the line. -->
 <section class="hero">
-  <div class="hero__collage" aria-hidden="true">
-    <div class="hero__panel hero__panel--lead">
-      <x-img slug="invisible-circus-ringmaster" class="fig--cover" sizes="(min-width: 62rem) 58vw, 100vw" priority alt="">
-    </div>
-    <div class="hero__panel">
-      <x-img slug="red-rebel-crowd" class="fig--cover" sizes="(min-width: 62rem) 42vw, 100vw" alt="">
-    </div>
-    <div class="hero__panel">
-      <x-img slug="immersive-aerial" class="fig--cover" sizes="(min-width: 62rem) 42vw, 100vw" alt="">
-    </div>
+  <div class="hero__video" aria-hidden="true">
+    <div id="yt-hero"></div>
   </div>
 
   <div class="hero__type">
@@ -233,7 +225,7 @@
          below is a stand-in from the Andre Pattenden set. Wake the Tiger is
          flagship #1 and currently the only flagship with no real asset —
          this must be replaced before launch, with usage rights confirmed. -->
-    <a class="card card--flagship" href="projects/wake-the-tiger.html" data-reveal>
+    <a class="card card--flagship" href="https://www.youtube.com/watch?v=R9Tp2lyKWfo" target="_blank" rel="noopener" data-reveal>
       <div class="card__media">
         <x-img slug="immersive-installation" class="fig--cover" sizes="100vw" alt="">
       </div>
@@ -250,7 +242,7 @@
     </a>
 
     <div class="mosaic mosaic--2" style="margin-block-start: var(--rule);">
-      <a class="card" href="projects/invisible-circus.html" data-reveal
+      <a class="card" href="https://youtu.be/0kdGSGDjKuM" target="_blank" rel="noopener" data-reveal
          style="min-height: clamp(18rem, 42vw, 28rem);">
         <div class="card__media">
           <x-img slug="performance-green" class="fig--cover" sizes="(min-width: 48rem) 60vw, 100vw" alt="">
@@ -266,7 +258,7 @@
         </div>
       </a>
 
-      <a class="card" href="projects/red-rebel.html" data-reveal data-reveal-delay="90"
+      <a class="card" href="https://www.youtube.com/watch?v=EsCxA5Ykk-g" target="_blank" rel="noopener" data-reveal data-reveal-delay="90"
          style="min-height: clamp(18rem, 42vw, 28rem);">
         <div class="card__media">
           <x-img slug="red-rebel-archway" class="fig--cover" sizes="(min-width: 48rem) 40vw, 100vw" alt="">
@@ -390,5 +382,35 @@
 </footer>
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+<script>
+  var tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+
+  function onYouTubeIframeAPIReady() {
+    new YT.Player('yt-hero', {
+      videoId: '0kdGSGDjKuM',
+      playerVars: {
+        autoplay: 1,
+        mute: 1,
+        loop: 1,
+        playlist: '0kdGSGDjKuM',
+        controls: 0,
+        rel: 0,
+        modestbranding: 1,
+        playsinline: 1,
+        showinfo: 0,
+        start: 0,
+        end: 240
+      },
+      events: {
+        onReady: function(e) {
+          e.target.mute();
+          e.target.playVideo();
+        }
+      }
+    });
+  }
+</script>
 </body>
 </html>
