@@ -39,7 +39,7 @@ function picture(a, depth) {
   const m = MANIFEST[a.slug];
   if (!m) throw new Error(`unknown image slug: "${a.slug}"`);
 
-  const base = `${'../'.repeat(depth)}assets/img/`;
+  const base = `${'../'.repeat(depth)}assets/img/images/`;
   const set = (ext) => m.widths.map(w => `${base}${m.slug}-${w}.${ext} ${w}w`).join(', ');
 
   // Above-the-fold images must not be lazy — lazy-loading the LCP element

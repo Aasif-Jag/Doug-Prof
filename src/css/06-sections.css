@@ -93,14 +93,14 @@
                                rgba(8,6,4,0) 55%, rgba(8,6,4,0.96) 100%);
   pointer-events: none;
 }
-.hero__video iframe {
+.hero__video video {
   position: absolute;
   top: 50%;
   left: 50%;
   width: max(100%, 177.78vh);
   height: max(100%, 56.25vw);
   transform: translate(-50%, -50%);
-  border: 0;
+  object-fit: cover;
   pointer-events: none;
 }
 

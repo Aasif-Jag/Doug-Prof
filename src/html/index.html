@@ -12,7 +12,7 @@
 <meta property="og:title" content="Doug Francisco — Creative Director &amp; Immersive Experience Designer">
 <meta property="og:description" content="Creative direction, immersive experience design and large-scale spectacle. Wake the Tiger, Boomtown Fair, Invisible Circus, Red Rebel Brigade.">
 <meta property="og:url" content="https://dougfrancisco.com/">
-<meta property="og:image" content="https://dougfrancisco.com/assets/img/red-rebel-crowd-1200.jpg">
+<meta property="og:image" content="https://dougfrancisco.com/assets/img/images/red-rebel-crowd-1200.jpg">
 <meta property="og:image:alt" content="The Red Rebel Brigade moving in silent procession through a crowded street">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
@@ -95,7 +95,9 @@
      below the line. -->
 <section class="hero">
   <div class="hero__video" aria-hidden="true">
-    <div id="yt-hero"></div>
+    <video autoplay muted loop playsinline>
+      <source src="assets/vid/hero.mp4" type="video/mp4">
+    </video>
   </div>
 
   <div class="hero__type">
@@ -221,11 +223,7 @@
   </div>
 
   <div class="wrap wrap--flush">
-    <!-- ⚠ CONTENT GAP: no Wake the Tiger photography was supplied. The image
-         below is a stand-in from the Andre Pattenden set. Wake the Tiger is
-         flagship #1 and currently the only flagship with no real asset —
-         this must be replaced before launch, with usage rights confirmed. -->
-    <a class="card card--flagship" href="https://www.youtube.com/watch?v=R9Tp2lyKWfo" target="_blank" rel="noopener" data-reveal>
+    <a class="card card--flagship" href="projects/wake-the-tiger.html" data-reveal>
       <div class="card__media">
         <x-img slug="immersive-installation" class="fig--cover" sizes="100vw" alt="">
       </div>
@@ -242,7 +240,7 @@
     </a>
 
     <div class="mosaic mosaic--2" style="margin-block-start: var(--rule);">
-      <a class="card" href="https://youtu.be/0kdGSGDjKuM" target="_blank" rel="noopener" data-reveal
+      <a class="card" href="projects/invisible-circus.html" data-reveal
          style="min-height: clamp(18rem, 42vw, 28rem);">
         <div class="card__media">
           <x-img slug="performance-green" class="fig--cover" sizes="(min-width: 48rem) 60vw, 100vw" alt="">
@@ -258,7 +256,7 @@
         </div>
       </a>
 
-      <a class="card" href="https://www.youtube.com/watch?v=EsCxA5Ykk-g" target="_blank" rel="noopener" data-reveal data-reveal-delay="90"
+      <a class="card" href="projects/red-rebel.html" data-reveal data-reveal-delay="90"
          style="min-height: clamp(18rem, 42vw, 28rem);">
         <div class="card__media">
           <x-img slug="red-rebel-archway" class="fig--cover" sizes="(min-width: 48rem) 40vw, 100vw" alt="">
@@ -382,35 +380,5 @@
 </footer>
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
-<script>
-  var tag = document.createElement('script');
-  tag.src = 'https://www.youtube.com/iframe_api';
-  document.head.appendChild(tag);
-
-  function onYouTubeIframeAPIReady() {
-    new YT.Player('yt-hero', {
-      videoId: '0kdGSGDjKuM',
-      playerVars: {
-        autoplay: 1,
-        mute: 1,
-        loop: 1,
-        playlist: '0kdGSGDjKuM',
-        controls: 0,
-        rel: 0,
-        modestbranding: 1,
-        playsinline: 1,
-        showinfo: 0,
-        start: 0,
-        end: 240
-      },
-      events: {
-        onReady: function(e) {
-          e.target.mute();
-          e.target.playVideo();
-        }
-      }
-    });
-  }
-</script>
 </body>
 </html>
