@@ -1,0 +1,6 @@
+.DS_Store
+node_modules/
+assets/vid/IV Hallowen.mp4
+.claude/
+src/
+tools/
