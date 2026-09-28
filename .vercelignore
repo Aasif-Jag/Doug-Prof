@@ -1,7 +1,5 @@
 .DS_Store
 node_modules/
-assets/vid/IV Hallowen.mp4
-assets/vid/Doug main video final.mov
-.claude/
+assets/vid/IV Hallowen.mp4.claude/
 src/
 tools/
