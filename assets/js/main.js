@@ -10,11 +10,12 @@
 import { initNav } from './modules/nav.js';
 import { initReveal } from './modules/reveal.js';
 import { initImages } from './modules/images.js';
+import { initVideo } from './modules/video.js';
 
 document.documentElement.classList.remove('no-js');
 
 const boot = () => {
-  [initNav, initReveal, initImages].forEach((fn) => {
+  [initNav, initReveal, initImages, initVideo].forEach((fn) => {
     try { fn(); } catch (err) { console.error(`[df] ${fn.name} failed`, err); }
   });
 };
